@@ -1,0 +1,9 @@
+[submodule "backend"]
+	path = backend
+	url = https://github.com/ddryad/TF-Calendar.git
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/Haroune07/TF-Calendar-Frontend.git
+[submodule "omnivox"]
+	path = omnivox
+	url = https://github.com/ddryad/TF-Calendar-Omnivox.git
