@@ -1,0 +1,40 @@
+services:
+  omnivox:
+    build:
+      context: ./TF-Calendar-Omnivox
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./TF-Calendar
+    ports:
+      - "3000:3000"
+    environment:
+      BACKEND_PORT: 3000
+      NODE_ENV: production
+      SESSION_SECRET: ${SESSION_SECRET:-dev-session-secret-change-me}
+      FRONTEND_ORIGIN: http://localhost:5173
+      OMNIVOX_API_URL: http://omnivox:8000
+      # Google OAuth login won't actually work with placeholder values,
+      # but the app needs *something* non-empty here to boot at all.
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-placeholder}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-placeholder}
+      GOOGLE_CALLBACK_URL: ${GOOGLE_CALLBACK_URL:-http://localhost:3000/auth/google/callback}
+    depends_on:
+      - omnivox
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./TF-Calendar-Frontend
+      args:
+        # Left empty on purpose: the frontend calls relative "/api/..." paths,
+        # which nginx.conf proxies to the "backend" service below.
+        VITE_API_URL: ""
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
