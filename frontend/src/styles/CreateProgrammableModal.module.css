@@ -1,0 +1,315 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+  animation: fadeIn 0.15s ease;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 101;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 440px;
+  padding: 24px;
+  animation: slideUp 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translate(-50%, -46%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.closeBtn:hover {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+/* TYPE TOGGLE */
+.typeToggle {
+  display: flex;
+  background: #f1f5f9;
+  border-radius: 8px;
+  padding: 3px;
+  margin-bottom: 20px;
+}
+
+.toggleBtn {
+  flex: 1;
+  padding: 7px;
+  border: none;
+  background: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.toggleBtn.active {
+  background: #ffffff;
+  color: #1e293b;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* FORM */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.field input,
+.field select {
+  padding: 9px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #1e293b;
+  background: #f8fafc;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  background: #fff;
+}
+
+.error {
+  font-size: 13px;
+  color: #ef4444;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 0;
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.cancelBtn {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.cancelBtn:hover {
+  background: #f1f5f9;
+}
+
+.submitBtn {
+  flex: 2;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.submitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* CONFLICT WARNING BANNER */
+.conflitWarning {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-radius: 10px;
+  padding: 12px 14px;
+  animation: slideUp 0.15s ease;
+}
+
+.conflitIcon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.conflitBody {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.conflitText {
+  font-size: 13px;
+  font-weight: 600;
+  color: #92400e;
+  margin: 0;
+}
+
+.conflitSubtext {
+  font-size: 12px;
+  color: #b45309;
+  margin: 0;
+}
+
+.conflitActions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.conflitCancelBtn {
+  padding: 7px 14px;
+  border: 1px solid #fcd34d;
+  border-radius: 7px;
+  background: white;
+  font-size: 13px;
+  font-weight: 500;
+  color: #92400e;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.conflitCancelBtn:hover:not(:disabled) {
+  background: #fef3c7;
+}
+
+.conflitConfirmBtn {
+  padding: 7px 14px;
+  border: none;
+  border-radius: 7px;
+  background: #f59e0b;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.conflitConfirmBtn:hover:not(:disabled) {
+  background: #d97706;
+}
+
+.conflitCancelBtn:disabled,
+.conflitConfirmBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+.inviteSection {
+  margin-top: 1rem;
+}
+
+.inviteTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  color: #111827;
+
+  margin-bottom: 0.8rem;
+}
+
+.friendInviteItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0.7rem 0;
+
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.friendInviteLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.friendInviteAvatar {
+  width: 34px;
+  height: 34px;
+
+  border-radius: 50%;
+
+  background: #2563eb;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+}

@@ -1,0 +1,43 @@
+services:
+  omnivox:
+    build:
+      context: ./omnivox
+      dockerfile: Dockerfile
+    container_name: tf-calendar-omnivox
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: tf-calendar-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=${PORT:-3000}
+      - OMNIVOX_SERVICE_URL=${OMNIVOX_SERVICE_URL:-http://omnivox:8000}
+      - SESSION_SECRET=${SESSION_SECRET:-tf-calendar-secret-key-super-secure}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - GOOGLE_CALLBACK_URL=${GOOGLE_CALLBACK_URL:-http://localhost:3000/api/auth/google/callback}
+      - GOOGLE_REDIRECT_URL=${GOOGLE_REDIRECT_URL:-http://localhost:3000/api/auth/google/callback}
+    depends_on:
+      - omnivox
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: http://localhost:3000
+    container_name: tf-calendar-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
